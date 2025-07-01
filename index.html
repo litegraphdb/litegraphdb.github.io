@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LiteGraph | AI-Native Multi-Dimensional Database</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="https://github.com/jchristn/LiteGraph/blob/main/assets/favicon.png?raw=true">
+    <link rel="icon" type="image/png" href="https://github.com/litegraphdb/litegraph/blob/main/assets/favicon.png?raw=true">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <img src="https://github.com/jchristn/LiteGraph/blob/main/assets/favicon.png?raw=true" alt="LiteGraph Logo" class="logo">
+                <img src="https://github.com/litegraphdb/litegraph/blob/main/assets/favicon.png?raw=true" alt="LiteGraph Logo" class="logo">
                 <span class="brand-text">LiteGraph</span>
             </div>
             <div class="nav-links">
@@ -42,7 +42,7 @@
                 <a href="#comparison">Comparison</a>
                 <a href="#use-cases">Use Cases</a>
                 <a href="#getting-started">Get Started</a>
-                <a href="https://github.com/jchristn/LiteGraph" target="_blank" class="github-link">
+                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="github-link">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
@@ -61,7 +61,7 @@
                 <span class="gradient-text">AI-Native.</span>
             </h1>
             <p class="hero-subtitle">
-                The multi-dimensional graph database that speaks your AI's language. 
+                The multi-dimensional graph database that speaks your AI's language.<br />
                 Relationships, metadata, vectors, and nested data—all in one unified layer.
             </p>
             <div class="hero-badges">
@@ -73,7 +73,7 @@
             </div>
             <div class="hero-actions">
                 <a href="#getting-started" class="btn btn-primary">Get Started</a>
-                <a href="https://github.com/jchristn/LiteGraph" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="btn btn-secondary">View on GitHub</a>
             </div>
         </div>
     </section>
@@ -461,8 +461,8 @@ curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/edges \
                     </div>
                     <p>RESTful API with comprehensive endpoints for all graph operations.</p>
                     <div class="sdk-links">
-                        <a href="https://github.com/jchristn/LiteGraph/blob/main/REST_API.md" target="_blank">API Documentation →</a>
-                        <a href="https://github.com/jchristn/LiteGraph/blob/main/LiteGraph.postman_collection.json" target="_blank">Postman Collection →</a>
+                        <a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank">API Documentation →</a>
+                        <a href="https://github.com/litegraphdb/litegraph/blob/main/LiteGraph.postman_collection.json" target="_blank">Postman Collection →</a>
                     </div>
                 </div>
             </div>
@@ -480,10 +480,10 @@ curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/edges \
                 <div class="docker-example">
                     <h3>Quick Start</h3>
                     <pre class="docker-code"><code># Pull and run LiteGraph
-docker run -d --name litegraph -p 8701:8701 -v $(pwd)/data:/data jchristn/litegraph:latest
+docker run -d --name litegraph -p 8701:8701 -v $(pwd)/data:/data litegraphdb/litegraph:latest
 
 # Or use Docker Compose
-curl -O https://raw.githubusercontent.com/jchristn/LiteGraph/main/docker-compose.yml
+curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-compose.yml
 docker-compose up -d</code></pre>
                 </div>
                 <div class="docker-features">
@@ -496,7 +496,7 @@ docker-compose up -d</code></pre>
                     </ul>
                     <div class="docker-links">
                         <a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank" class="btn btn-primary">View on Docker Hub</a>
-                        <a href="https://github.com/jchristn/LiteGraph/tree/main/Docker" target="_blank" class="btn btn-secondary">Docker Scripts</a>
+                        <a href="https://github.com/litegraphdb/litegraph/tree/main/Docker" target="_blank" class="btn btn-secondary">Docker Scripts</a>
                     </div>
                 </div>
             </div>
@@ -508,7 +508,7 @@ docker-compose up -d</code></pre>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="https://github.com/jchristn/LiteGraph/blob/main/assets/favicon.png?raw=true" alt="LiteGraph" class="footer-logo">
+                    <img src="https://github.com/litegraphdb/litegraph/blob/main/assets/favicon.png?raw=true" alt="LiteGraph" class="footer-logo">
                     <p>The AI-native multi-dimensional database.</p>
                     <p>Graph, vector, relational, and metadata in a single database.</p>
                     <p class="footer-license">Free & Open Source • MIT License</p>
@@ -516,10 +516,10 @@ docker-compose up -d</code></pre>
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="https://github.com/jchristn/LiteGraph" target="_blank">GitHub Repository</a></li>
-                        <li><a href="https://github.com/jchristn/LiteGraph/blob/main/README.md" target="_blank">Documentation</a></li>
-                        <li><a href="https://github.com/jchristn/LiteGraph/blob/main/REST_API.md" target="_blank">REST API Docs</a></li>
-                        <li><a href="https://github.com/jchristn/LiteGraph/issues" target="_blank">Report Issues</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/README.md" target="_blank">Documentation</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank">REST API Docs</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/issues" target="_blank">Report Issues</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
