@@ -173,7 +173,8 @@ body {
     color: var(--accent-primary);
 }
 
-.github-link {
+.github-link,
+.api-docs-link {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -183,7 +184,8 @@ body {
     transition: all 0.3s ease;
 }
 
-.github-link:hover {
+.github-link:hover,
+.api-docs-link:hover {
     background-color: var(--bg-tertiary);
     transform: translateY(-2px);
 }
@@ -811,7 +813,7 @@ body {
         font-size: 0.875rem;
     }
     
-    .nav-links a:not(.github-link) {
+    .nav-links a:not(.github-link):not(.api-docs-link) {
         display: none;
     }
     
