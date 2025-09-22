@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Code/LiteGraph/LiteGraph-4.0/**)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch",
+      "WebFetch(domain:hub.docker.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

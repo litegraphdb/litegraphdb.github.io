@@ -42,6 +42,7 @@
                 <a href="#comparison">Comparison</a>
                 <a href="#use-cases">Use Cases</a>
                 <a href="#getting-started">Get Started</a>
+                <a href="#web-ui">Web UI</a>
                 <a href="https://litegraph.readme.io" target="_blank" class="api-docs-link">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -142,6 +143,14 @@
                 <div class="benefit-card">
                     <h3>Transparent & Source-Available</h3>
                     <p>Open-source with simple, understandable architecture—ideal for integration and auditing.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Built-in Web Dashboard</h3>
+                    <p>Comprehensive web UI for exploring graphs, managing data, and visualizing relationships. Deploy alongside your database or run standalone.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Vector Search with HNSW Indexing</h3>
+                    <p>Advanced vector similarity search with optional HNSW indexing for sub-millisecond semantic queries at scale.</p>
                 </div>
             </div>
         </div>
@@ -514,6 +523,50 @@ docker-compose up -d</code></pre>
         </div>
     </section>
 
+    <!-- Web UI Section -->
+    <section id="web-ui" class="web-ui">
+        <div class="container">
+            <h2 class="section-title">Web Dashboard & Management UI</h2>
+            <p class="section-subtitle">
+                Explore, visualize, and manage your LiteGraph databases with our comprehensive web interface.
+            </p>
+            <div class="web-ui-content">
+                <div class="web-ui-features">
+                    <h3>Dashboard Features</h3>
+                    <ul>
+                        <li><strong>Graph Management</strong> - Create and manage graph definitions</li>
+                        <li><strong>Node & Edge Operations</strong> - Add, edit, and organize graph nodes and edges</li>
+                        <li><strong>Labels & Tags</strong> - Organize graph elements with labels and tags</li>
+                        <li><strong>Vector Management</strong> - Manage vector embeddings associated with graph elements</li>
+                        <li><strong>Graph Visualization</strong> - 2D and 3D interactive graph rendering</li>
+                        <li><strong>Multi-tenant Support</strong> - Tenant isolation and user management</li>
+                        <li><strong>Authentication</strong> - User login and admin controls</li>
+                        <li><strong>Data Backup</strong> - Interface for backup management operations</li>
+                    </ul>
+                </div>
+                <div class="web-ui-deployment">
+                    <h3>Quick Deploy</h3>
+                    <pre class="docker-code"><code># Run the web UI with Docker
+docker run -d --name litegraph-ui -p 8080:8080 \
+  -e LITEGRAPH_SERVER=http://localhost:8701 \
+  jchristn/litegraph-ui:v1.0.0
+
+# Or download and run from source
+git clone https://github.com/litegraphdb/ui
+cd ui
+npm install && npm start</code></pre>
+                    <div class="web-ui-links">
+                        <a href="https://github.com/litegraphdb/ui" target="_blank" class="btn btn-primary">View Source Code</a>
+                        <a href="https://hub.docker.com/repository/docker/jchristn/litegraph-ui/general" target="_blank" class="btn btn-secondary">Docker Hub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="web-ui-note">
+                <p><strong>Note:</strong> The web UI connects to your LiteGraph server instance and provides a database administration interface for managing graphs, nodes, edges, and metadata. Built with React/Next.js and designed for development and database management tasks.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -527,20 +580,21 @@ docker-compose up -d</code></pre>
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="https://github.com/litegraphdb/litegraph" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://github.com/litegraphdb" target="_blank">GitHub Repositories</a></li>
+                        <li><a href="https://github.com/litegraphdb/ui" target="_blank">Web Dashboard</a></li>
                         <li><a href="https://litegraph.readme.io" target="_blank">API Documentation</a></li>
-                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/README.md" target="_blank">README</a></li>
                         <li><a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank">REST API Docs</a></li>
                         <li><a href="https://github.com/litegraphdb/litegraph/issues" target="_blank">Report Issues</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>SDKs</h4>
+                    <h4>Packages</h4>
                     <ul>
-                        <li><a href="https://www.nuget.org/packages/LiteGraph/" target="_blank">C# / .NET</a></li>
-                        <li><a href="https://www.npmjs.com/package/litegraphdb" target="_blank">JavaScript</a></li>
-                        <li><a href="https://pypi.org/project/litegraph-sdk/" target="_blank">Python</a></li>
-                        <li><a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank">Docker</a></li>
+                        <li><a href="https://www.nuget.org/packages/LiteGraph/" target="_blank">NuGet (C#)</a></li>
+                        <li><a href="https://www.npmjs.com/package/litegraphdb" target="_blank">npm (JavaScript)</a></li>
+                        <li><a href="https://pypi.org/project/litegraph-sdk/" target="_blank">PyPI (Python)</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank">Docker (Server)</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn/litegraph-ui" target="_blank">Docker (UI)</a></li>
                     </ul>
                 </div>
             </div>
