@@ -111,6 +111,10 @@
                     <h3>Flexible In-Memory or On-Disk Operation</h3>
                     <p>Choose your performance profile: blazing-fast RAM operations for real-time AI or persistent SQLite storage for durability. Switch modes without changing your code.</p>
                 </div>
+                <div class="feature-card">
+                    <h3>Native MCP Server Integration</h3>
+                    <p>Built-in Model Context Protocol (MCP) server lets AI assistants and LLMs interact with your graph data directly. Seamlessly integrate LiteGraph into your AI and RAG pipelines without custom glue code.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -151,6 +155,10 @@
                 <div class="benefit-card">
                     <h3>Vector Search with HNSW Indexing</h3>
                     <p>Advanced vector similarity search with optional HNSW indexing for sub-millisecond semantic queries at scale.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>First-Class MCP Server Support</h3>
+                    <p>Native Model Context Protocol integration means your AI agents can query, traverse, and update graph data using standardized tooling—no middleware required.</p>
                 </div>
             </div>
         </div>
@@ -232,6 +240,11 @@
                     <div class="use-case-icon">🏭</div>
                     <h3>Digital Twins & Simulation Graphs</h3>
                     <p>Model real-world systems (IoT, manufacturing, security) with mutable node/edge metadata, labels, and temporal graph states. Simulate complex systems with ease.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🤖</div>
+                    <h3>MCP-Powered AI Pipelines</h3>
+                    <p>Connect AI assistants and LLMs directly to your graph data via the built-in MCP server. Enable agentic workflows, tool-calling, and autonomous data retrieval without custom integration code.</p>
                 </div>
             </div>
         </div>
@@ -494,17 +507,31 @@ curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/edges \
         <div class="container">
             <h2 class="section-title">Rapid Deployment with Docker</h2>
             <p class="section-subtitle">
-                Get LiteGraph up and running in seconds with our official Docker image.
+                Get LiteGraph up and running in seconds with our official Docker images—including the MCP server for AI integration.
             </p>
             <div class="docker-content">
                 <div class="docker-example">
-                    <h3>Quick Start</h3>
+                    <h3>LiteGraph Server</h3>
                     <pre class="docker-code"><code># Pull and run LiteGraph
 docker run -d --name litegraph -p 8701:8701 -v $(pwd)/data:/data litegraphdb/litegraph:latest
 
 # Or use Docker Compose
-curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-compose.yml
-docker-compose up -d</code></pre>
+curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-litegraph/compose.yaml
+docker compose up -d</code></pre>
+                </div>
+                <div class="docker-example">
+                    <h3>MCP Server for AI Integration</h3>
+                    <pre class="docker-code"><code># Run the MCP server for AI/LLM integration
+docker run -d --name litegraph-mcp -p 8000:8000 \
+  -e LITEGRAPH_ENDPOINT=http://localhost:8701 \
+  -e LITEGRAPH_TENANT_GUID=your-tenant-guid \
+  -e LITEGRAPH_ACCESS_KEY=your-access-key \
+  jchristn/litegraph-mcp:latest
+
+# Or use Docker Compose
+curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-mcp/compose.yaml
+docker compose up -d</code></pre>
+                    <p class="docker-note">The MCP server exposes LiteGraph operations as standardized tools for AI assistants, enabling direct graph queries, traversals, and updates from your RAG pipelines and agentic workflows.</p>
                 </div>
                 <div class="docker-features">
                     <h3>Docker Features</h3>
@@ -513,9 +540,11 @@ docker-compose up -d</code></pre>
                         <li>Persistent storage with volume mounting</li>
                         <li>Environment variable configuration</li>
                         <li>Health checks included</li>
+                        <li>MCP server for seamless AI integration</li>
                     </ul>
                     <div class="docker-links">
-                        <a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank" class="btn btn-primary">View on Docker Hub</a>
+                        <a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank" class="btn btn-primary">LiteGraph on Docker Hub</a>
+                        <a href="https://hub.docker.com/r/jchristn/litegraph-mcp" target="_blank" class="btn btn-primary">MCP Server on Docker Hub</a>
                         <a href="https://github.com/litegraphdb/litegraph/tree/main/Docker" target="_blank" class="btn btn-secondary">Docker Scripts</a>
                     </div>
                 </div>
@@ -594,6 +623,7 @@ npm install && npm start</code></pre>
                         <li><a href="https://www.npmjs.com/package/litegraphdb" target="_blank">npm (JavaScript)</a></li>
                         <li><a href="https://pypi.org/project/litegraph-sdk/" target="_blank">PyPI (Python)</a></li>
                         <li><a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank">Docker (Server)</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn/litegraph-mcp" target="_blank">Docker (MCP Server)</a></li>
                         <li><a href="https://hub.docker.com/r/jchristn/litegraph-ui" target="_blank">Docker (UI)</a></li>
                     </ul>
                 </div>

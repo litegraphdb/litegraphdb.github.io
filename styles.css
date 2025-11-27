@@ -742,6 +742,17 @@ body {
     justify-content: center;
 }
 
+.docker-note {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-primary);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
 /* Footer */
 .footer {
     background-color: var(--bg-tertiary);
