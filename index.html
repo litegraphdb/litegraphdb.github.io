@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiteGraph | AI-Native Multi-Dimensional Database</title>
+    <title>LiteGraph | Production Graph Database for AI Systems</title>
+    <meta name="description" content="LiteGraph is a production-ready graph database with native graph queries, vectors, metadata, transactions, RBAC, PostgreSQL support, and observability.">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/litegraphdb/litegraph/main/assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,625 +12,545 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-    </button>
-
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-brand">
-                <img src="https://raw.githubusercontent.com/litegraphdb/litegraph/main/assets/favicon.png" alt="LiteGraph Logo" class="logo">
+            <a href="#home" class="nav-brand">
+                <img src="https://raw.githubusercontent.com/litegraphdb/litegraph/main/assets/favicon.png" alt="LiteGraph logo" class="logo">
                 <span class="brand-text">LiteGraph</span>
-            </div>
+            </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#benefits">Why LiteGraph</a>
-                <a href="#comparison">Comparison</a>
-                <a href="#use-cases">Use Cases</a>
+                <a href="#query">Query</a>
+                <a href="#operations">Operations</a>
                 <a href="#getting-started">Get Started</a>
-                <a href="#web-ui">Web UI</a>
-                <a href="https://litegraph.readme.io" target="_blank" class="api-docs-link">
+                <a href="#web-ui">Dashboard</a>
+                <a href="https://github.com/litegraphdb/litegraph/blob/main/README.md" target="_blank" class="api-docs-link" rel="noopener">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
                         <line x1="16" y1="13" x2="8" y2="13"></line>
                         <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
                     </svg>
-                    API Docs
+                    Docs
                 </a>
-                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="github-link">
+                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="github-link" rel="noopener">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
                     </svg>
                     GitHub
                 </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-content">
+            <p class="eyebrow">LiteGraph 6.0</p>
             <h1 class="hero-title">
-                One Database.<br>
-                Every Dimension.<br>
-                <span class="gradient-text">AI-Native.</span>
+                Multi-modal AI data platform
             </h1>
             <p class="hero-subtitle">
-                The multi-dimensional graph database that speaks your AI's language.<br>
-                Relationships, metadata, vectors, and nested data—all in one unified layer.
+                Store relationships, metadata, JSON data, and vectors in one graph database. Query it with a Cypher/GQL-inspired language, mutate it transactionally, secure it with scoped credentials, and observe it with Prometheus, OpenTelemetry, and Grafana.
             </p>
             <div class="hero-badges">
-                <span class="badge">Free & Open Source</span>
+                <span class="badge">Native Graph Query</span>
+                <span class="badge">Graph Transactions</span>
+                <span class="badge">SQLite Default</span>
+                <span class="badge">PostgreSQL Ready</span>
+                <span class="badge">MCP Server</span>
                 <span class="badge">MIT License</span>
-                <span class="badge">SQLite-Based</span>
-                <span class="badge">Zero Dependencies</span>
-                <span class="badge">Edge-Ready</span>
             </div>
             <div class="hero-actions">
                 <a href="#getting-started" class="btn btn-primary">Get Started</a>
-                <a href="https://litegraph.readme.io" target="_blank" class="btn btn-secondary">API Documentation</a>
-                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="btn btn-secondary">View on GitHub</a>
+                <a href="https://github.com/litegraphdb/litegraph" target="_blank" class="btn btn-secondary" rel="noopener">View on GitHub</a>
             </div>
         </div>
     </section>
 
-    <!-- Key Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Key Features</h2>
+            <h2 class="section-title">Ready For Production AI Applications</h2>
+            <p class="section-subtitle">
+                LiteGraph brings the core database, server, SDKs, MCP tools, console, dashboard, and operational stack into one coordinated release.
+            </p>
             <div class="features-grid">
                 <div class="feature-card">
-                    <h3>Unified Data Store for AI</h3>
-                    <p>One powerful platform combining graph relationships, relational queries, and vector embeddings. Stop juggling multiple databases—your AI applications deserve integrated intelligence.</p>
+                    <h3>Native Graph Query</h3>
+                    <p>Run Cypher/GQL-inspired graph reads, traversals, filters, aggregates, supplied-vector search, and child-object mutations inside one tenant and one graph.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Comprehensive Developer-Friendly API</h3>
-                    <p>Intuitive SDKs for C#, JavaScript, and Python with full REST support. Build faster with clear documentation, predictable patterns, and thoughtful abstractions that just make sense.</p>
+                    <h3>Graph Transactions</h3>
+                    <p>Commit or roll back graph-scoped node, edge, label, tag, and vector changes as a single unit with structured operation results.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Find the Right Data Relationships, Fast</h3>
-                    <p>Lightning-quick graph traversals, vector similarity search, and SQL-like queries in one engine. Navigate complex connections in milliseconds, not minutes.</p>
+                    <h3>Graph Plus Vector Search</h3>
+                    <p>Attach vectors to graph objects and use HNSW indexing, metadata filters, and graph context together instead of splitting data across separate systems.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Flexible In-Memory or On-Disk Operation</h3>
-                    <p>Choose your performance profile: blazing-fast RAM operations for real-time AI or persistent SQLite storage for durability. Switch modes without changing your code.</p>
+                    <h3>Provider-Neutral Storage</h3>
+                    <p>Use SQLite by default for zero-config development and PostgreSQL for production. MySQL and SQL Server have explicit provider placeholders for future expansion.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>Native MCP Server Integration</h3>
-                    <p>Built-in Model Context Protocol (MCP) server lets AI assistants and LLMs interact with your graph data directly. Seamlessly integrate LiteGraph into your AI and RAG pipelines without custom glue code.</p>
+                    <h3>RBAC And Scoped Credentials</h3>
+                    <p>Protect REST and MCP access with built-in roles, custom roles, credential scopes, immutable system roles, and authorization audit records.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>MCP Server</h3>
+                    <p>Let MCP-compatible AI tools inspect, query, and mutate LiteGraph through a maintained server with REST-boundary authorization.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
+    <section id="query" class="query-language">
         <div class="container">
-            <h2 class="section-title">⚡ Why LiteGraph is Different</h2>
+            <h2 class="section-title">Query Relationships Directly</h2>
+            <p class="section-subtitle">
+                LiteGraph native graph query is a parser-backed, LiteGraph-native profile inspired by familiar graph query models.
+            </p>
+            <div class="query-panel">
+                <pre class="docker-code"><code>MATCH (person:Person)-[works:WORKS_ON]->(project:Project)
+WHERE person.data.role = $role
+RETURN person, works, project
+ORDER BY person.name
+LIMIT 10</code></pre>
+                <div class="query-points">
+                    <p class="query-kicker">Execution surfaces</p>
+                    <h3>Query from every surface</h3>
+                    <p class="query-summary">Use the same graph-scoped query model from embedded applications, HTTP clients, MCP tools, and terminal workflows.</p>
+                    <ul class="query-surface-list">
+                        <li><span class="query-surface-label">C# embedded</span><code>client.Query.Execute(...)</code></li>
+                        <li><span class="query-surface-label">REST</span><code>POST /v1.0/tenants/{tenantGuid}/graphs/{graphGuid}/query</code></li>
+                        <li><span class="query-surface-label">MCP</span><code>graph/query</code></li>
+                        <li><span class="query-surface-label">Console</span><code>lg --execute "MATCH (n) RETURN n"</code></li>
+                    </ul>
+                    <a href="https://github.com/litegraphdb/litegraph/blob/main/DSL.md" target="_blank" class="sdk-link query-guide-link" rel="noopener">Open the query language guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="operations" class="benefits">
+        <div class="container">
+            <h2 class="section-title">Operationally Ready</h2>
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <h3>Single Platform for Graph, Relational, and Vector</h3>
-                    <p>Unifies three essential data paradigms in one lightweight engine. No more complex ETL pipelines or data synchronization nightmares.</p>
+                    <h3>PostgreSQL Production Backend</h3>
+                    <p>SQLite remains the local default. PostgreSQL is the recommended production backend with provider-specific SQL, JSON filtering, transactions, and migration guidance.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Graph Intelligence at the Edge</h3>
-                    <p>Combines graph structure, metadata semantics, and vector space reasoning—all embeddable in a 5MB binary.</p>
+                    <h3>Prometheus Metrics</h3>
+                    <p>Expose HTTP, repository, query, vector, authorization, and request history metrics through the Prometheus-compatible <code>/metrics</code> endpoint.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Embedded or Server Mode</h3>
-                    <p>Run as an embedded library for zero-latency access or deploy as a REST API server. Same data model, your choice of deployment.</p>
+                    <h3>OpenTelemetry Instrumentation</h3>
+                    <p>Trace request, repository, query, vector index, and authorization activity with LiteGraph-specific tags and status information.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>SQLite Foundation</h3>
-                    <p>Built on the world's most deployed database engine. Battle-tested reliability with zero operational overhead.</p>
+                    <h3>Provisioned Grafana Dashboard</h3>
+                    <p>The Docker Compose stack starts Grafana OSS and Prometheus with a preloaded LiteGraph dashboard for immediate telemetry inspection.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Blazing-Fast In-Memory Graphs</h3>
-                    <p>Optional full in-RAM execution with controlled persistence enables high throughput applications.</p>
+                    <h3>Request History</h3>
+                    <p>Use recent request details for debugging while Prometheus and OpenTelemetry carry aggregate monitoring and tracing.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Transparent & Source-Available</h3>
-                    <p>Open-source with simple, understandable architecture—ideal for integration and auditing.</p>
+                    <h3>LiteGraphConsole</h3>
+                    <p>Install the <code>lg</code> global tool for an interactive shell over a local database or remote endpoint, similar to using <code>sqlite3</code>.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Built-in Web Dashboard</h3>
-                    <p>Comprehensive web UI for exploring graphs, managing data, and visualizing relationships. Deploy alongside your database or run standalone.</p>
+                    <h3>Comprehensive Dashboard</h3>
+                    <p>Manage authorization, inspect request history, explore API calls, view JSON records, and monitor operational state from the web dashboard.</p>
                 </div>
                 <div class="benefit-card">
-                    <h3>Vector Search with HNSW Indexing</h3>
-                    <p>Advanced vector similarity search with optional HNSW indexing for sub-millisecond semantic queries at scale.</p>
-                </div>
-                <div class="benefit-card">
-                    <h3>First-Class MCP Server Support</h3>
-                    <p>Native Model Context Protocol integration means your AI agents can query, traverse, and update graph data using standardized tooling—no middleware required.</p>
+                    <h3>SDK and MCP Coverage</h3>
+                    <p>C#, JavaScript, Python, REST, MCP, and dashboard surfaces are aligned with the v6 feature set where each surface is appropriate.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Comparison Section -->
-    <section id="comparison" class="comparison">
-        <div class="container">
-            <h2 class="section-title">Why Traditional Databases Fall Short</h2>
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h3>Relational (SQL)</h3>
-                    <p class="comparison-problem">Rigid schemas can't handle AI's dynamic needs. No native vector search. Painful for graph traversals. Your AI speaks embeddings, not tables.</p>
-                </div>
-                <div class="comparison-card">
-                    <h3>Vector Databases</h3>
-                    <p class="comparison-problem">Great for similarity search, blind to relationships. Can't track lineage, store metadata, or handle complex objects. It's one-dimensional thinking in a multi-dimensional AI world.</p>
-                </div>
-                <div class="comparison-card">
-                    <h3>Graph Databases</h3>
-                    <p class="comparison-problem">Excel at relationships but can't do semantic search. No vector operations means no AI-native queries. Missing the intelligence layer modern AI demands.</p>
-                </div>
-                <div class="comparison-card">
-                    <h3>Object/BLOB Storage</h3>
-                    <p class="comparison-problem">Unstructured dumping grounds with no intelligence. Can't query relationships, find similar content, or maintain context. It's storage without understanding.</p>
-                </div>
-            </div>
-            <div class="multi-tool-problem">
-                <h3>The Multi-Tool Problem</h3>
-                <p>Stitching together 4+ databases means complex pipelines, data synchronization nightmares, and queries that take days to write. Your AI moves at machine speed—your data infrastructure should too.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Use Cases Section -->
     <section id="use-cases" class="use-cases">
         <div class="container">
-            <h2 class="section-title">Where LiteGraph Shines</h2>
+            <h2 class="section-title">Where LiteGraph Fits</h2>
             <p class="section-subtitle">
-                From edge AI to enterprise knowledge graphs, LiteGraph powers applications that demand multi-dimensional intelligence.
+                Use LiteGraph when graph structure, vector similarity, object metadata, and operational control need to live together.
             </p>
             <div class="use-case-grid">
                 <div class="use-case-card">
-                    <div class="use-case-icon">🎯</div>
-                    <h3>Embedded AI/ML Applications</h3>
-                    <p>Power lightweight, local-first AI systems with graph-native metadata and vector embeddings—no external database required. Perfect for edge computing and privacy-sensitive applications.</p>
-                </div>
-                <div class="use-case-card">
-                    <div class="use-case-icon">🚀</div>
+                    <div class="use-case-icon">AI</div>
                     <h3>RAG Beyond Vectors</h3>
-                    <p>Combine vector similarity with graph relationships and metadata filters for more accurate, contextual retrieval that actually understands your data.</p>
+                    <p>Combine semantic search with graph relationships, labels, tags, and JSON data for retrieval that keeps structure and meaning together.</p>
                 </div>
                 <div class="use-case-card">
-                    <div class="use-case-icon">🌐</div>
-                    <h3>Knowledge Graphs for Edge Devices</h3>
-                    <p>Run complex entity-relation and vector similarity lookups entirely in-process, even on constrained hardware. Bring intelligence to IoT and mobile applications.</p>
+                    <div class="use-case-icon">KG</div>
+                    <h3>Knowledge Graphs</h3>
+                    <p>Model people, systems, documents, assets, events, and relationships with queryable metadata and typed graph edges.</p>
                 </div>
                 <div class="use-case-card">
-                    <div class="use-case-icon">🏢</div>
-                    <h3>Enterprise Data Relationship Mapping</h3>
-                    <p>Build semantically rich models for identity graphs, asset tracking, and network topologies with full traceability. Track complex organizational relationships with ease.</p>
+                    <div class="use-case-icon">AG</div>
+                    <h3>Agent Memory</h3>
+                    <p>Expose LiteGraph through MCP so AI agents can store context, inspect relationships, query history, and update graph state.</p>
                 </div>
                 <div class="use-case-card">
-                    <div class="use-case-icon">🔍</div>
-                    <h3>Semantic Search for Unstructured Data</h3>
-                    <p>Store structured metadata, JSON blobs, and vector embeddings together to support hybrid symbolic-vector search at scale. Query by meaning AND structure.</p>
-                </div>
-                <div class="use-case-card">
-                    <div class="use-case-icon">🔗</div>
-                    <h3>Custom Data Mesh/Lineage Engines</h3>
-                    <p>Track data transformations across pipelines and teams with full visibility using labeled, versioned graph relationships. Know where your data comes from and goes.</p>
-                </div>
-                <div class="use-case-card">
-                    <div class="use-case-icon">⚡</div>
-                    <h3>In-Memory AI Prototyping</h3>
-                    <p>Rapidly prototype graph/vector logic in-memory and flush to disk only when needed—ideal for LLM and RAG experiments. Iterate at the speed of thought.</p>
-                </div>
-                <div class="use-case-card">
-                    <div class="use-case-icon">🏭</div>
-                    <h3>Digital Twins & Simulation Graphs</h3>
-                    <p>Model real-world systems (IoT, manufacturing, security) with mutable node/edge metadata, labels, and temporal graph states. Simulate complex systems with ease.</p>
-                </div>
-                <div class="use-case-card">
-                    <div class="use-case-icon">🤖</div>
-                    <h3>MCP-Powered AI Pipelines</h3>
-                    <p>Connect AI assistants and LLMs directly to your graph data via the built-in MCP server. Enable agentic workflows, tool-calling, and autonomous data retrieval without custom integration code.</p>
+                    <div class="use-case-icon">OP</div>
+                    <h3>Operational Graphs</h3>
+                    <p>Track infrastructure, identity, security, lineage, and dependency networks with transactional updates and production monitoring.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Getting Started Section -->
     <section id="getting-started" class="getting-started">
         <div class="container">
-            <h2 class="section-title">Get Started in Minutes</h2>
+            <h2 class="section-title">Get Started In Minutes</h2>
             <p class="section-subtitle">
-                Install LiteGraph using NuGet into your solution, or deploy a separate server using Docker
+                Run the full stack with Docker Compose, use LiteGraph embedded in .NET, call REST directly, or install the <code>lg</code> console.
             </p>
             <div class="code-examples">
                 <div class="code-tabs">
-                    <button class="code-tab active" data-lang="csharp-integrated">C# (Integrated)</button>
-                    <button class="code-tab" data-lang="csharp-sdk">C# (SDK)</button>
-                    <button class="code-tab" data-lang="javascript">JavaScript</button>
-                    <button class="code-tab" data-lang="python">Python</button>
-                    <button class="code-tab" data-lang="curl">cURL</button>
+                    <button class="code-tab active" data-lang="docker">Docker Compose</button>
+                    <button class="code-tab" data-lang="source">From Source</button>
+                    <button class="code-tab" data-lang="query">Native Query</button>
+                    <button class="code-tab" data-lang="csharp">C# Embedded</button>
+                    <button class="code-tab" data-lang="transaction">Transaction</button>
+                    <button class="code-tab" data-lang="console">Console</button>
                 </div>
                 <div class="code-content">
-                    <pre class="code-block active" data-lang="csharp-integrated"><code>using LiteGraph;
+                    <pre class="code-block active" data-lang="docker"><code>git clone https://github.com/litegraphdb/litegraph.git
+cd litegraph/docker
+docker compose up -d
 
-// Initialize SDK
-var client = new LiteGraphClient(new SqliteRepository("ai.db"));
+# LiteGraph REST: http://localhost:8701
+# LiteGraph MCP:  http://localhost:8200
+# Prometheus:     http://localhost:9090
+# Grafana OSS:    http://localhost:3000</code></pre>
+                    <pre class="code-block" data-lang="source"><code>git clone https://github.com/litegraphdb/litegraph.git
+cd litegraph
 
-// Create a graph
-var graph = client.CreateGraph(new Graph { Name = "AI Knowledge" });
+# Build the solution
+dotnet build src/LiteGraph.sln -c Release -f net8.0
 
-// Create nodes
-var user = client.CreateNode(new Node { 
-    GraphGUID = graph.GUID,
-    Name = "User Profile",
-    Labels = new[] { "user" },
-    Tags = new NameValueCollection { { "type", "customer" } },
-    Vectors = new[] { new VectorMetadata {
-        Model = "ada-002",
-        Vectors = new[] { 0.1f, 0.2f, 0.3f }
-    }}
-});
+# Start LiteGraph Server
+dotnet run --project src/LiteGraph.Server/LiteGraph.Server.csproj --framework net8.0
 
-var pref = client.CreateNode(new Node {
-    GraphGUID = graph.GUID,
-    Name = "Prefers Technical",
-    Labels = new[] { "preference" }
-});
-
-// Connect them
-var edge = client.CreateEdge(new Edge {
-    GraphGUID = graph.GUID,
-    From = user.GUID,
-    To = pref.GUID,
-    Name = "has_preference"
-});</code></pre>
-                    <pre class="code-block" data-lang="csharp-sdk"><code>using LiteGraph.Sdk;
-
-// Initialize SDK
-var sdk = new LiteGraphSdk("http://localhost:8701", "bearer-token");
-
-// Create a graph
-var graph = await sdk.Graph.Create(new Graph { 
-    TenantGUID = tenantGuid,
-    Name = "AI Knowledge",
-    Labels = new List&lt;string&gt; { "knowledge", "ai" },
-    Tags = new NameValueCollection { { "domain", "customer-service" } }
-});
-
-// Create nodes
-var user = await sdk.Node.Create(new Node { 
-    TenantGUID = tenantGuid,
-    GraphGUID = graph.GUID,
-    Name = "User Profile",
-    Labels = new List&lt;string&gt; { "user" },
-    Tags = new NameValueCollection { { "type", "customer" } },
-    Vectors = new List&lt;VectorMetadata&gt; {
-        new VectorMetadata {
-            Model = "ada-002",
-            Dimensionality = 3,
-            Content = "customer profile data",
-            Vectors = new List&lt;float&gt; { 0.1f, 0.2f, 0.3f }
-        }
-    }
-});
-
-var pref = await sdk.Node.Create(new Node {
-    TenantGUID = tenantGuid,
-    GraphGUID = graph.GUID,
-    Name = "Prefers Technical",
-    Labels = new List&lt;string&gt; { "preference" },
-    Tags = new NameValueCollection { { "category", "communication-style" } }
-});
-
-// Connect them
-var edge = await sdk.Edge.Create(new Edge {
-    TenantGUID = tenantGuid,
-    GraphGUID = graph.GUID,
-    From = user.GUID,
-    To = pref.GUID,
-    Name = "has_preference",
-    Labels = new List&lt;string&gt; { "relationship" }
-});</code></pre>
-                    <pre class="code-block" data-lang="javascript"><code>import { LiteGraphSdk } from 'litegraphdb';
-
-// Initialize SDK
-const sdk = new LiteGraphSdk('http://localhost:8701', 'tenant-id', 'key');
-
-// Create a graph
-const graph = await sdk.createGraph('graph-id', 'AI Knowledge');
-
-// Create nodes
-const user = await sdk.createNode({
-    GraphGUID: graph.GUID,
-    Name: 'User Profile',
-    Labels: ['user'],
-    Tags: { type: 'customer' },
-    Vectors: [{
-        Model: 'ada-002',
-        Vectors: [0.1, 0.2, 0.3]
-    }]
-});
-
-const pref = await sdk.createNode({
-    GraphGUID: graph.GUID,
-    Name: 'Prefers Technical',
-    Labels: ['preference']
-});
-
-// Connect them
-const edge = await sdk.createEdge({
-    GraphGUID: graph.GUID,
-    From: user.GUID,
-    To: pref.GUID,
-    Name: 'has_preference'
-});</code></pre>
-                    <pre class="code-block" data-lang="python"><code>from litegraph_sdk import configure, Graph, Node, Edge
-
-# Initialize SDK
-configure(endpoint="http://localhost:8701", tenant_guid="id", access_key="key")
-
-# Create a graph
-graph = Graph.create(name="AI Knowledge")
-
-# Create nodes
-user = Node.create(
-    graph_guid=graph.guid,
-    name="User Profile",
-    labels=["user"],
-    tags={"type": "customer"},
-    vectors=[{
-        "Model": "ada-002",
-        "Vectors": [0.1, 0.2, 0.3]
-    }]
-)
-
-pref = Node.create(
-    graph_guid=graph.guid,
-    name="Prefers Technical",
-    labels=["preference"]
-)
-
-# Connect them
-edge = Edge.create(
-    graph_guid=graph.guid,
-    from_node=user.guid,
-    to_node=pref.guid,
-    name="has_preference"
-)</code></pre>
-                    <pre class="code-block" data-lang="curl"><code># Create a graph
-curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d '{"Name": "AI Knowledge"}'
-
-# Create user node with vector
-curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/nodes \
+# Start the dashboard in another terminal
+cd dashboard
+npm install
+npm run dev</code></pre>
+                    <pre class="code-block" data-lang="query"><code>curl -X POST http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/query \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
   -d '{
-    "Name": "User Profile",
-    "Labels": ["user"],
-    "Tags": {"type": "customer"},
-    "Vectors": [{
-      "Model": "ada-002",
-      "Vectors": [0.1, 0.2, 0.3]
-    }]
-  }'
+    "Query": "MATCH (n:Person) WHERE n.data.role = $role RETURN n LIMIT 10",
+    "Parameters": {
+      "role": "engineer"
+    },
+    "MaxResults": 100,
+    "TimeoutSeconds": 30
+  }'</code></pre>
+                    <pre class="code-block" data-lang="csharp"><code>using System.Collections.Generic;
+using LiteGraph;
+using LiteGraph.GraphRepositories.Sqlite;
 
-# Create preference node
-curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/nodes \
+LiteGraphClient client = new LiteGraphClient(
+    new SqliteGraphRepository("litegraph.db"));
+
+client.InitializeRepository();
+
+TenantMetadata tenant = await client.Tenant.Create(
+    new TenantMetadata { Name = "Example tenant" });
+
+Graph graph = await client.Graph.Create(new Graph
+{
+    TenantGUID = tenant.GUID,
+    Name = "Knowledge graph"
+});
+
+Node ada = await client.Node.Create(new Node
+{
+    TenantGUID = tenant.GUID,
+    GraphGUID = graph.GUID,
+    Name = "Ada",
+    Labels = new List&lt;string&gt; { "Person" },
+    Data = new { role = "engineer" }
+});
+
+GraphQueryResult result = await client.Query.Execute(
+    tenant.GUID,
+    graph.GUID,
+    new GraphQueryRequest
+    {
+        Query = "MATCH (n:Person) RETURN n LIMIT 10"
+    });</code></pre>
+                    <pre class="code-block" data-lang="transaction"><code>curl -X POST http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/transaction \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Content-Type: application/json" \
-  -d '{"Name": "Prefers Technical", "Labels": ["preference"]}'
+  -d '{
+    "Operations": [
+      {
+        "OperationType": "Create",
+        "ObjectType": "Node",
+        "Payload": {
+          "Name": "Ada",
+          "Labels": ["Person"],
+          "Data": { "role": "engineer" }
+        }
+      }
+    ],
+    "MaxOperations": 100,
+    "TimeoutSeconds": 30
+  }'</code></pre>
+                    <pre class="code-block" data-lang="console"><code># From the LiteGraph repository root
+install-tool.bat
 
-# Create edge
-curl -X PUT http://localhost:8701/v1.0/tenants/${TENANT}/graphs/${GRAPH}/edges \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d '{"From": "${USER_NODE}", "To": "${PREF_NODE}", "Name": "has_preference"}'</code></pre>
+# Local SQLite database
+lg --database litegraph.db \
+  --tenant 00000000-0000-0000-0000-000000000000 \
+  --graph 00000000-0000-0000-0000-000000000000
+
+# Remote server
+lg --endpoint http://localhost:8701 \
+  --tenant ${TENANT} \
+  --graph ${GRAPH} \
+  --token ${TOKEN} \
+  --execute "MATCH (n) RETURN n LIMIT 5"</code></pre>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SDKs Section -->
     <section id="sdks" class="sdks">
         <div class="container">
-            <h2 class="section-title">Available SDKs</h2>
+            <h2 class="section-title">Clients And Packages</h2>
             <div class="sdk-grid">
                 <div class="sdk-card">
                     <div class="sdk-header">
                         <h3>C# / .NET</h3>
-                        <span class="sdk-badge">.NET 8.0+</span>
+                        <span class="sdk-badge">v6.0.0</span>
                     </div>
-                    <p>Full-featured SDK for .NET applications with embedded and server modes.</p>
+                    <p>Use LiteGraph embedded with SQLite or consume a LiteGraph Server through the C# SDK.</p>
                     <div class="sdk-stats">
-                        <img src="https://img.shields.io/nuget/v/LiteGraph.svg?style=flat" alt="NuGet Version">
-                        <img src="https://img.shields.io/nuget/dt/LiteGraph.svg" alt="NuGet Downloads">
+                        <img src="https://img.shields.io/nuget/v/LiteGraph.svg?style=flat" alt="LiteGraph NuGet version">
+                        <img src="https://img.shields.io/nuget/dt/LiteGraph.svg" alt="LiteGraph NuGet downloads">
                     </div>
-                    <a href="https://www.nuget.org/packages/LiteGraph/" target="_blank" class="sdk-link">Install via NuGet →</a>
+                    <a href="https://www.nuget.org/packages/LiteGraph/" target="_blank" class="sdk-link" rel="noopener">Install via NuGet</a>
                 </div>
                 <div class="sdk-card">
                     <div class="sdk-header">
                         <h3>JavaScript</h3>
-                        <span class="sdk-badge">Node.js 18.20.4+</span>
+                        <span class="sdk-badge">npm</span>
                     </div>
-                    <p>Modern JavaScript SDK with TypeScript support and comprehensive API coverage.</p>
+                    <p>Use the JavaScript SDK for browser and Node.js applications that call LiteGraph Server.</p>
                     <div class="sdk-code">
                         <code>npm i litegraphdb</code>
                     </div>
-                    <a href="https://www.npmjs.com/package/litegraphdb" target="_blank" class="sdk-link">View on npm →</a>
+                    <a href="https://www.npmjs.com/package/litegraphdb" target="_blank" class="sdk-link" rel="noopener">View on npm</a>
                 </div>
                 <div class="sdk-card">
                     <div class="sdk-header">
                         <h3>Python</h3>
-                        <span class="sdk-badge">Python 3.8+</span>
+                        <span class="sdk-badge">PyPI</span>
                     </div>
-                    <p>Pythonic SDK with async support and comprehensive error handling.</p>
+                    <p>Use the Python SDK for scripts, ingestion jobs, and application services.</p>
                     <div class="sdk-code">
                         <code>pip install litegraph_sdk</code>
                     </div>
-                    <a href="https://pypi.org/project/litegraph-sdk/" target="_blank" class="sdk-link">View on PyPI →</a>
+                    <a href="https://pypi.org/project/litegraph-sdk/" target="_blank" class="sdk-link" rel="noopener">View on PyPI</a>
                 </div>
                 <div class="sdk-card">
                     <div class="sdk-header">
-                        <h3>REST API</h3>
-                        <span class="sdk-badge">HTTP/JSON</span>
+                        <h3>REST And MCP</h3>
+                        <span class="sdk-badge">HTTP</span>
                     </div>
-                    <p>RESTful API with comprehensive endpoints for all graph operations.</p>
+                    <p>Call REST directly or expose LiteGraph to AI tools through HTTP, TCP, and WebSocket MCP transports.</p>
                     <div class="sdk-links">
-                        <a href="https://litegraph.readme.io" target="_blank">API Documentation →</a>
-                        <a href="https://github.com/litegraphdb/litegraph/blob/main/LiteGraph.postman_collection.json" target="_blank">Postman Collection →</a>
+                        <a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank" rel="noopener">REST API docs</a>
+                        <a href="https://github.com/litegraphdb/litegraph/blob/main/README.md#mcp-server" target="_blank" rel="noopener">MCP server docs</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Docker Deployment Section -->
     <section class="docker-deployment">
         <div class="container">
-            <h2 class="section-title">Rapid Deployment with Docker</h2>
+            <h2 class="section-title">Docker Deployment</h2>
             <p class="section-subtitle">
-                Get LiteGraph up and running in seconds with our official Docker images—including the MCP server for AI integration.
+                The checked-in Compose stack starts LiteGraph Server, LiteGraph MCP, Prometheus, and Grafana OSS.
             </p>
             <div class="docker-content">
                 <div class="docker-example">
-                    <h3>LiteGraph Server</h3>
-                    <pre class="docker-code"><code># Pull and run LiteGraph
-docker run -d --name litegraph -p 8701:8701 -v $(pwd)/data:/data litegraphdb/litegraph:latest
+                    <h3>Server And Dashboard Images</h3>
+                    <pre class="docker-code"><code>docker pull jchristn77/litegraph:v6.0.0
+docker pull jchristn77/litegraph-mcp:v6.0.0
+docker pull jchristn77/litegraph-ui:v6.0.0
 
-# Or use Docker Compose
-curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-litegraph/compose.yaml
+cd docker
 docker compose up -d</code></pre>
                 </div>
                 <div class="docker-example">
-                    <h3>MCP Server for AI Integration</h3>
-                    <pre class="docker-code"><code># Run the MCP server for AI/LLM integration
-docker run -d --name litegraph-mcp -p 8000:8000 \
-  -e LITEGRAPH_ENDPOINT=http://localhost:8701 \
-  -e LITEGRAPH_TENANT_GUID=your-tenant-guid \
-  -e LITEGRAPH_ACCESS_KEY=your-access-key \
-  jchristn/litegraph-mcp:latest
+                    <h3>Observability</h3>
+                    <pre class="docker-code"><code># Prometheus scrapes LiteGraph at:
+http://localhost:8701/metrics
 
-# Or use Docker Compose
-curl -O https://raw.githubusercontent.com/litegraphdb/litegraph/main/docker-mcp/compose.yaml
-docker compose up -d</code></pre>
-                    <p class="docker-note">The MCP server exposes LiteGraph operations as standardized tools for AI assistants, enabling direct graph queries, traversals, and updates from your RAG pipelines and agentic workflows.</p>
+# Grafana is available at:
+http://localhost:3000
+
+# Default Grafana login:
+admin / admin</code></pre>
                 </div>
                 <div class="docker-features">
-                    <h3>Docker Features</h3>
+                    <h3>What Starts</h3>
                     <ul>
-                        <li>Pre-configured with sensible defaults</li>
-                        <li>Persistent storage with volume mounting</li>
-                        <li>Environment variable configuration</li>
-                        <li>Health checks included</li>
-                        <li>MCP server for seamless AI integration</li>
+                        <li>LiteGraph REST server on port 8701</li>
+                        <li>LiteGraph MCP server on port 8200</li>
+                        <li>Prometheus on port 9090</li>
+                        <li>Grafana OSS on port 3000 with a provisioned LiteGraph dashboard</li>
+                        <li>Named volumes for Prometheus and Grafana storage</li>
                     </ul>
                     <div class="docker-links">
-                        <a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank" class="btn btn-primary">LiteGraph on Docker Hub</a>
-                        <a href="https://hub.docker.com/r/jchristn/litegraph-mcp" target="_blank" class="btn btn-primary">MCP Server on Docker Hub</a>
-                        <a href="https://github.com/litegraphdb/litegraph/tree/main/Docker" target="_blank" class="btn btn-secondary">Docker Scripts</a>
+                        <a href="https://hub.docker.com/r/jchristn77/litegraph" target="_blank" class="btn btn-primary" rel="noopener">Server Image</a>
+                        <a href="https://hub.docker.com/r/jchristn77/litegraph-mcp" target="_blank" class="btn btn-primary" rel="noopener">MCP Image</a>
+                        <a href="https://github.com/litegraphdb/litegraph/tree/main/docker" target="_blank" class="btn btn-secondary" rel="noopener">Compose Files</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Web UI Section -->
     <section id="web-ui" class="web-ui">
         <div class="container">
-            <h2 class="section-title">Web Dashboard & Management UI</h2>
+            <h2 class="section-title">Dashboard And Administration</h2>
             <p class="section-subtitle">
-                Explore, visualize, and manage your LiteGraph databases with our comprehensive web interface.
+                The web dashboard is now aligned with v6 authorization, request history, API exploration, graph management, and operational monitoring workflows.
             </p>
+            <div class="dashboard-gallery" aria-label="LiteGraph dashboard screenshots">
+                <figure class="dashboard-shot dashboard-shot-featured">
+                    <img src="assets/screenshots/ss1.png" alt="LiteGraph dashboard graph workspace for the AI Support Demo graph" width="1909" height="1018" loading="lazy" decoding="async">
+                    <figcaption>
+                        <span>Graph Workspace</span>
+                        Explore connected AI system data with labels, names, graph controls, and relationship context in one workspace.
+                    </figcaption>
+                </figure>
+                <div class="dashboard-shot-grid">
+                    <figure class="dashboard-shot">
+                        <img src="assets/screenshots/ss2.png" alt="LiteGraph node editor with labels, tags, vector metadata, and data fields" width="1877" height="1022" loading="lazy" decoding="async">
+                        <figcaption>
+                            <span>Node And Vector Editing</span>
+                            Update labels, tags, vectors, and JSON data without switching tools.
+                        </figcaption>
+                    </figure>
+                    <figure class="dashboard-shot">
+                        <img src="assets/screenshots/ss3.png" alt="LiteGraph request history dashboard with success and failure telemetry over time" width="1912" height="1020" loading="lazy" decoding="async">
+                        <figcaption>
+                            <span>Request Telemetry</span>
+                            Track recent requests, failures, duration, and operational links close to the graph workflow.
+                        </figcaption>
+                    </figure>
+                    <figure class="dashboard-shot">
+                        <img src="assets/screenshots/ss4.png" alt="LiteGraph API Explorer with request parameters and JSON response preview" width="1903" height="698" loading="lazy" decoding="async">
+                        <figcaption>
+                            <span>API Explorer</span>
+                            Send REST calls, inspect responses, and keep recent requests available during development.
+                        </figcaption>
+                    </figure>
+                    <figure class="dashboard-shot">
+                        <img src="assets/screenshots/ss5.png" alt="LiteGraph authorization page listing roles, scopes, permissions, and resources" width="1910" height="720" loading="lazy" decoding="async">
+                        <figcaption>
+                            <span>Authorization</span>
+                            Manage tenant roles, graph scopes, permissions, resources, and built-in policy boundaries.
+                        </figcaption>
+                    </figure>
+                    <figure class="dashboard-shot dashboard-shot-wide">
+                        <img src="assets/screenshots/ss6.png" alt="LiteGraph 3D graph view with node information panel for an authorization node" width="1905" height="961" loading="lazy" decoding="async">
+                        <figcaption>
+                            <span>3D Graph Inspection</span>
+                            Inspect graph structure, node metadata, and connected operational context in an interactive view.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
             <div class="web-ui-content">
                 <div class="web-ui-features">
                     <h3>Dashboard Features</h3>
                     <ul>
-                        <li><strong>Graph Management</strong> - Create and manage graph definitions</li>
-                        <li><strong>Node & Edge Operations</strong> - Add, edit, and organize graph nodes and edges</li>
-                        <li><strong>Labels & Tags</strong> - Organize graph elements with labels and tags</li>
-                        <li><strong>Vector Management</strong> - Manage vector embeddings associated with graph elements</li>
-                        <li><strong>Graph Visualization</strong> - 2D and 3D interactive graph rendering</li>
-                        <li><strong>Multi-tenant Support</strong> - Tenant isolation and user management</li>
-                        <li><strong>Authentication</strong> - User login and admin controls</li>
-                        <li><strong>Data Backup</strong> - Interface for backup management operations</li>
+                        <li><strong>Graph Management</strong> - Create and manage graphs, nodes, edges, labels, tags, and vectors</li>
+                        <li><strong>Authorization</strong> - Manage roles, scopes, immutable built-in roles, and assignments</li>
+                        <li><strong>Request History</strong> - Inspect recent requests, timing, outcomes, JSON, and diagnostics</li>
+                        <li><strong>API Explorer</strong> - Send REST calls and query templates from the browser</li>
+                        <li><strong>Visualization</strong> - Explore graph structure with 2D and 3D views</li>
+                        <li><strong>Operations</strong> - Use monitoring links and request detail views during administration</li>
                     </ul>
                 </div>
                 <div class="web-ui-deployment">
-                    <h3>Quick Deploy</h3>
-                    <pre class="docker-code"><code># Run the web UI with Docker
-docker run -d --name litegraph-ui -p 8080:8080 \
+                    <h3>Run The Dashboard</h3>
+                    <pre class="docker-code"><code>docker run -d --name litegraph-ui -p 3000:3000 \
   -e LITEGRAPH_SERVER=http://localhost:8701 \
-  jchristn/litegraph-ui:v1.0.0
+  jchristn77/litegraph-ui:v6.0.0
 
-# Or download and run from source
-git clone https://github.com/litegraphdb/ui
-cd ui
-npm install && npm start</code></pre>
+# Or run from the monorepo
+cd dashboard
+npm install
+npm run dev</code></pre>
                     <div class="web-ui-links">
-                        <a href="https://github.com/litegraphdb/ui" target="_blank" class="btn btn-primary">View Source Code</a>
-                        <a href="https://hub.docker.com/repository/docker/jchristn/litegraph-ui/general" target="_blank" class="btn btn-secondary">Docker Hub</a>
+                        <a href="https://github.com/litegraphdb/litegraph/tree/main/dashboard" target="_blank" class="btn btn-primary" rel="noopener">Dashboard Source</a>
+                        <a href="https://hub.docker.com/r/jchristn77/litegraph-ui" target="_blank" class="btn btn-secondary" rel="noopener">Dashboard Image</a>
                     </div>
                 </div>
-            </div>
-            <div class="web-ui-note">
-                <p><strong>Note:</strong> The web UI connects to your LiteGraph server instance and provides a database administration interface for managing graphs, nodes, edges, and metadata. Built with React/Next.js and designed for development and database management tasks.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <img src="https://raw.githubusercontent.com/litegraphdb/litegraph/main/assets/favicon.png" alt="LiteGraph" class="footer-logo">
-                    <p>The AI-native multi-dimensional database.</p>
-                    <p>Graph, vector, relational, and metadata in a single database.</p>
-                    <p class="footer-license">Free & Open Source • MIT License</p>
+                    <p>Production graph database for AI systems.</p>
+                    <p>Graph, vector, metadata, query, transaction, and observability in one project.</p>
+                    <p class="footer-license">Free and open source. MIT License.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Resources</h4>
+                    <h4>Documentation</h4>
                     <ul>
-                        <li><a href="https://github.com/litegraphdb" target="_blank">GitHub Repositories</a></li>
-                        <li><a href="https://github.com/litegraphdb/ui" target="_blank">Web Dashboard</a></li>
-                        <li><a href="https://litegraph.readme.io" target="_blank">API Documentation</a></li>
-                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank">REST API Docs</a></li>
-                        <li><a href="https://github.com/litegraphdb/litegraph/issues" target="_blank">Report Issues</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/README.md" target="_blank" rel="noopener">README</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/DSL.md" target="_blank" rel="noopener">Query Language</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/REST_API.md" target="_blank" rel="noopener">REST API</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/OBSERVABILITY.md" target="_blank" rel="noopener">Observability</a></li>
+                        <li><a href="https://github.com/litegraphdb/litegraph/blob/main/STORAGE.md" target="_blank" rel="noopener">Storage</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Packages</h4>
                     <ul>
-                        <li><a href="https://www.nuget.org/packages/LiteGraph/" target="_blank">NuGet (C#)</a></li>
-                        <li><a href="https://www.npmjs.com/package/litegraphdb" target="_blank">npm (JavaScript)</a></li>
-                        <li><a href="https://pypi.org/project/litegraph-sdk/" target="_blank">PyPI (Python)</a></li>
-                        <li><a href="https://hub.docker.com/r/jchristn/litegraph" target="_blank">Docker (Server)</a></li>
-                        <li><a href="https://hub.docker.com/r/jchristn/litegraph-mcp" target="_blank">Docker (MCP Server)</a></li>
-                        <li><a href="https://hub.docker.com/r/jchristn/litegraph-ui" target="_blank">Docker (UI)</a></li>
+                        <li><a href="https://www.nuget.org/packages/LiteGraph/" target="_blank" rel="noopener">NuGet</a></li>
+                        <li><a href="https://www.npmjs.com/package/litegraphdb" target="_blank" rel="noopener">npm</a></li>
+                        <li><a href="https://pypi.org/project/litegraph-sdk/" target="_blank" rel="noopener">PyPI</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn77/litegraph" target="_blank" rel="noopener">Docker Server</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn77/litegraph-mcp" target="_blank" rel="noopener">Docker MCP</a></li>
+                        <li><a href="https://hub.docker.com/r/jchristn77/litegraph-ui" target="_blank" rel="noopener">Docker Dashboard</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 LiteGraph and Community</p>
+                <p>Copyright 2026 LiteGraph and contributors.</p>
             </div>
         </div>
     </footer>

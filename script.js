@@ -10,7 +10,7 @@ html.setAttribute('data-theme', savedTheme);
 themeToggle.addEventListener('click', () => {
     const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
+
     html.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
 });
@@ -22,11 +22,11 @@ const codeBlocks = document.querySelectorAll('.code-block');
 codeTabs.forEach(tab => {
     tab.addEventListener('click', () => {
         const lang = tab.getAttribute('data-lang');
-        
+
         // Update active tab
         codeTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        
+
         // Update active code block
         codeBlocks.forEach(block => {
             if (block.getAttribute('data-lang') === lang) {
@@ -60,13 +60,13 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > 100) {
         navbar.style.boxShadow = 'var(--shadow-md)';
     } else {
         navbar.style.boxShadow = 'none';
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -86,7 +86,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Apply fade-in animation to sections
-document.querySelectorAll('.feature-card, .sdk-card, .use-case-card, .benefit-card, .comparison-card').forEach(el => {
+document.querySelectorAll('.feature-card, .sdk-card, .use-case-card, .benefit-card, .comparison-card, .query-points, .dashboard-shot').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -96,11 +96,11 @@ document.querySelectorAll('.feature-card, .sdk-card, .use-case-card, .benefit-ca
 // Copy code functionality (optional enhancement)
 function addCopyButtons() {
     const codeBlocks = document.querySelectorAll('.code-block');
-    
+
     codeBlocks.forEach(block => {
         const wrapper = document.createElement('div');
         wrapper.style.position = 'relative';
-        
+
         const copyButton = document.createElement('button');
         copyButton.textContent = 'Copy';
         copyButton.style.cssText = `
@@ -117,15 +117,15 @@ function addCopyButtons() {
             opacity: 0.8;
             transition: opacity 0.3s ease;
         `;
-        
+
         copyButton.addEventListener('mouseenter', () => {
             copyButton.style.opacity = '1';
         });
-        
+
         copyButton.addEventListener('mouseleave', () => {
             copyButton.style.opacity = '0.8';
         });
-        
+
         copyButton.addEventListener('click', async () => {
             const code = block.querySelector('code').textContent;
             try {
@@ -138,7 +138,7 @@ function addCopyButtons() {
                 console.error('Failed to copy:', err);
             }
         });
-        
+
         block.style.position = 'relative';
         block.appendChild(copyButton);
     });
@@ -159,7 +159,7 @@ function createMobileMenu() {
             <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
     `;
-    
+
     // Add mobile menu functionality here if needed
 }
 
@@ -193,7 +193,7 @@ document.querySelectorAll('.node').forEach(node => {
     node.addEventListener('mouseenter', () => {
         node.style.transform = 'scale(1.5)';
     });
-    
+
     node.addEventListener('mouseleave', () => {
         node.style.transform = 'scale(1)';
     });
@@ -202,9 +202,9 @@ document.querySelectorAll('.node').forEach(node => {
 // Preload images for better performance
 function preloadImages() {
     const imageUrls = [
-        'https://github.com/jchristn/LiteGraph/blob/main/assets/favicon.png?raw=true'
+        'https://raw.githubusercontent.com/litegraphdb/litegraph/main/assets/favicon.png'
     ];
-    
+
     imageUrls.forEach(url => {
         const img = new Image();
         img.src = url;
